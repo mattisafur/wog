@@ -60,8 +60,7 @@ def get_list_from_user(amount_of_numbers: int) -> list[int]:
     number_id = 1
     while number_id <= amount_of_numbers:
         number = input(f'number {number_id} > ')
-        number = input_validation.validate_int(
-            number, input_not_number_prompt='please enter a number', input_not_int_prompt='please enter positive whole numbers only')
+        number = input_validation.validate_int(number, input_not_number_prompt='please enter a number', input_not_int_prompt='please enter positive whole numbers only')
         if number is not None:
             user_sequence.append(number)
             number_id += 1
