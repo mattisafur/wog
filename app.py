@@ -22,7 +22,8 @@ def start_play() -> None:
 
     while True:
         game_number = input('> ')
-        game_number = input_validation.validate_int_in_range(game_number, 1, len(games), input_not_number_prompt='Please enter a number', input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not a valid option')
+        game_number = input_validation.validate_int_in_range(game_number, 1, len(
+            games), input_not_number_prompt='Please enter a number', input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not a valid option')
         if game_number is not None:
             break
     game = games[game_number - 1]
@@ -34,7 +35,8 @@ def start_play() -> None:
 
     while True:
         difficulty_level = input('> ')
-        difficulty_level = input_validation.validate_int_in_range(difficulty_level, 1, len(game.difficulties), input_not_number_prompt='Please enter a number', input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not a valid option')
+        difficulty_level = input_validation.validate_int_in_range(difficulty_level, 1, len(
+            game.difficulties), input_not_number_prompt='Please enter a number', input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not a valid option')
         if difficulty_level is not None:
             break
     difficulty = game.difficulties[difficulty_level - 1]

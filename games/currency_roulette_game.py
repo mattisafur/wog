@@ -27,7 +27,8 @@ def play(difficulty: str) -> bool:
     print(name)
     print('='*len(name), end='\n\n')
     print(full_description, end='\n\n')
-    print(f'Difficuly {difficulty} - margin of {error_margin} ILS.', end='\n\n')
+    print(
+        f'Difficuly {difficulty} - margin of {error_margin} ILS.', end='\n\n')
 
     print(f'The amount to convert is: {amount} USD', end='\n\n')
 
@@ -38,8 +39,10 @@ def play(difficulty: str) -> bool:
 
 
 def get_money_interval(number: int, error_margin: int) -> tuple[float, float]:
-    exchange_rates = currencyapicom.Client(credentials.Currency_api_key).latest()
-    ils_exchange_rate = exchange_rates.get('data', {}).get('ILS', {}).get('value')
+    exchange_rates = currencyapicom.Client(
+        credentials.Currency_api_key).latest()
+    ils_exchange_rate = exchange_rates.get(
+        'data', {}).get('ILS', {}).get('value')
     converted_number = number * ils_exchange_rate
 
     return (converted_number - error_margin, converted_number + error_margin)
