@@ -15,7 +15,7 @@ def validate_int_in_range(string: str, min: int, max: int, input_empty_prompt: s
 
     # input not an int
     try:
-        result = int(string)
+        result: int = int(string)
     except ValueError:
         if input_not_int_prompt is not None:
             print(input_not_in_range_prompt)
@@ -46,7 +46,7 @@ def validate_int(string: str, input_empty_prompt: str | None = None, input_not_n
         return None
 
     try:
-        result = int(string)
+        result: int = int(string)
     except ValueError:
         if input_not_int_prompt is not None:
             print(input_not_int_prompt)
@@ -64,7 +64,7 @@ def validate_float(string: str, input_empty_prompt: str | None = None, input_not
 
     # input is not a float (or any number for that matter)
     try:
-        result = float(string)
+        result: float = float(string)
     except ValueError:
         if input_not_float_prompt is not None:
             print(input_not_float_prompt)

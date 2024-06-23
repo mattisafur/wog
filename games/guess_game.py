@@ -1,11 +1,11 @@
 import random
 import input_validation
 
-name = 'Guess Game'
-short_description = 'Guess a number and see if you chose like the computer.'
-full_description = '''A random number, 0 or higher will be selected by the game. you must guess that number.
+name: str = 'Guess Game'
+short_description: str = 'Guess a number and see if you chose like the computer.'
+full_description: str = '''A random number, 0 or higher will be selected by the game. you must guess that number.
 The range of number the game will choose from depends on the difficulty level selected.'''
-difficulties = [
+difficulties: list[str] = [
     'easy',
     'easy-medium',
     'medium',
@@ -15,7 +15,7 @@ difficulties = [
 
 
 def play(difficulty: str) -> bool:
-    difficulty_level = difficulties.index(difficulty) + 1
+    difficulty_level: int = difficulties.index(difficulty) + 1
 
     # print intro
     print(name)
@@ -24,8 +24,8 @@ def play(difficulty: str) -> bool:
     print(
         f'Difficulty {difficulty} - number chosen between 0 and {difficulty_level}')
 
-    number = generate_number(difficulty_level)
-    guess = get_guess_from_user(difficulty_level)
+    number: int = generate_number(difficulty_level)
+    guess: int = get_guess_from_user(difficulty_level)
 
     return compare_results(guess, number)
 
@@ -36,12 +36,13 @@ def generate_number(max_number: int) -> int:
 
 def get_guess_from_user(max_number: int) -> int:
     while True:
-        guess = input(f'please enter a number between 0 and {max_number}: ')
-        guess = input_validation.validate_int_in_range(guess, 0, max_number, input_not_number_prompt='Please enter a number',
-                                                       input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not in the specified range')
-        if guess is not None:
+        guess: str = input(
+            f'please enter a number between 0 and {max_number}: ')
+        parsed_guess: int | None = input_validation.validate_int_in_range(guess, 0, max_number, input_not_number_prompt='Please enter a number',
+                                                                          input_not_int_prompt='Please enter an integer', input_not_in_range_prompt='Input is not in the specified range')
+        if parsed_guess is not None:
             break
-    return guess
+    return parsed_guess
 
 
 def compare_results(user_guess: int, number: int) -> bool:

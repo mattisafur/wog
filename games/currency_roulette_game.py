@@ -3,12 +3,12 @@ import currencyapicom
 import credentials
 import input_validation
 
-name = 'Currency Roulette'
-short_description = 'Try and guess the value of a random amount of USD in ILS'
-full_description = '''An amount in USD between 1 and 100 will be chosen at random.
+name: str = 'Currency Roulette'
+short_description: str = 'Try and guess the value of a random amount of USD in ILS'
+full_description: str = '''An amount in USD between 1 and 100 will be chosen at random.
 You must enter an amount in shekels equal to the given amount.
 The error margin allowed in your answer depends on the difficulty level selected.'''
-difficulties = [
+difficulties: list[str] = [
     'easy',
     'easy-medium',
     'medium',
@@ -18,10 +18,10 @@ difficulties = [
 
 
 def play(difficulty: str) -> bool:
-    error_margin = 10 - (difficulties.index(difficulty) + 1)
+    error_margin: int = 10 - (difficulties.index(difficulty) + 1)
     if error_margin < 0:
         raise ValueError('Difficulty value too high, negative error margin.')
-    amount = random.randint(1, 100)
+    amount: int = random.randint(1, 100)
 
     # print intro
     print(name)
@@ -32,8 +32,9 @@ def play(difficulty: str) -> bool:
 
     print(f'The amount to convert is: {amount} USD', end='\n\n')
 
-    answer_range = get_money_interval(amount, error_margin)
-    guess = get_guess_from_user()
+    answer_range: tuple[float, float] = get_money_interval(
+        amount, error_margin)
+    guess: float = get_guess_from_user()
 
     return compare_results(guess, answer_range)
 
@@ -41,19 +42,19 @@ def play(difficulty: str) -> bool:
 def get_money_interval(number: int, error_margin: int) -> tuple[float, float]:
     exchange_rates = currencyapicom.Client(
         credentials.Currency_api_key).latest()
-    ils_exchange_rate = exchange_rates.get(
+    ils_exchange_rate: float = exchange_rates.get(
         'data', {}).get('ILS', {}).get('value')
-    converted_number = number * ils_exchange_rate
+    converted_number: float = number * ils_exchange_rate
 
     return (converted_number - error_margin, converted_number + error_margin)
 
 
 def get_guess_from_user() -> float:
     while True:
-        guess = input('Enter your guess: ')
-        guess = input_validation.validate_float(guess)
-        if guess is not None:
-            return guess
+        guess: str = input('Enter your guess: ')
+        parsed_guess: float | None = input_validation.validate_float(guess)
+        if parsed_guess is not None:
+            return parsed_guess
 
 
 def compare_results(user_input: float, answer_range: tuple[float, float]) -> bool:

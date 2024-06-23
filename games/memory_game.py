@@ -3,12 +3,12 @@ import keyboard
 import time
 import input_validation
 
-name = 'Memory Game'
-short_description = 'A sequence of numbers will appear for 1 second and you have to guess it back.'
-full_description = '''A sequence of number will be randomly generated and be shown on the screen for 0.7 seconds.
+name: str = 'Memory Game'
+short_description: str = 'A sequence of numbers will appear for 1 second and you have to guess it back.'
+full_description: str = '''A sequence of number will be randomly generated and be shown on the screen for 0.7 seconds.
 You must type back the sequence of numbers, one number at a time.
 The length of the sequence will depend of the difficulty chosen.'''
-difficulties = [
+difficulties: list[str] = [
     'easy',
     'easy-medium',
     'medium',
@@ -18,8 +18,8 @@ difficulties = [
 
 
 def play(difficulty: str) -> bool:
-    sequence_length = difficulties.index(difficulty) + 1
-    sequence = generate_sequence(sequence_length)
+    sequence_length: int = difficulties.index(difficulty) + 1
+    sequence: list[int] = generate_sequence(sequence_length)
 
     # Print intro
     print(name)
@@ -42,29 +42,29 @@ def play(difficulty: str) -> bool:
     time.sleep(0.7)
     print('\x1b[2K')
 
-    user_sequence = get_list_from_user(sequence_length)
+    user_sequence: list[int] = get_list_from_user(sequence_length)
 
     return is_list_equal(sequence, user_sequence)
 
 
 def generate_sequence(length: int) -> list[int]:
-    sequence = []
+    sequence: list[int] = []
     for _ in range(length):
         sequence.append(random.randint(1, 101))
     return sequence
 
 
 def get_list_from_user(amount_of_numbers: int) -> list[int]:
-    user_sequence = []
+    user_sequence: list[int] = []
 
     # get number from user and append it to the sequence
-    number_id = 1
+    number_id: int = 1
     while number_id <= amount_of_numbers:
-        number = input(f'number {number_id} > ')
-        number = input_validation.validate_int(
+        number: str = input(f'number {number_id} > ')
+        parsed_number: int | None = input_validation.validate_int(
             number, input_not_number_prompt='please enter a number', input_not_int_prompt='please enter positive whole numbers only')
-        if number is not None:
-            user_sequence.append(number)
+        if parsed_number is not None:
+            user_sequence.append(parsed_number)
             number_id += 1
         else:
             continue
