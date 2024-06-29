@@ -16,7 +16,6 @@ difficulties: list[str] = [
     'hard'
 ]
 
-
 def play(difficulty: str) -> bool:
     sequence_length: int = difficulties.index(difficulty) + 1
     sequence: list[int] = generate_sequence(sequence_length)

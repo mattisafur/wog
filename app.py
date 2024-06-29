@@ -1,5 +1,6 @@
 import input_validation
 from games import currency_roulette_game, guess_game, memory_game
+from score import add_score
 
 games = [
     memory_game,
@@ -42,4 +43,7 @@ def start_play() -> None:
     difficulty = game.difficulties[parsed_difficulty_level - 1]
 
     # start selected game
-    game.play(difficulty)
+    win: bool = game.play(difficulty)
+
+    if win:
+        add_score(parsed_difficulty_level)
