@@ -23,14 +23,16 @@ def main_page() -> str:
         <div id="score">{score}</dev>
     </body>
 </html>'''
-        except ValueError as error:
+        except ValueError:
             return f'''
 <html>
     <head>
         <title>Scores Game</title>
     </head>
     <body>
-        <h1>ERROR :< /h1>
-        <div id="score" style="color:red">{error}</div>
+        <h1>ERROR:</h1>
+        <div id="score" style="color:red">{utils.bad_return_code}</div>
     </body>
 </html>'''
+
+score_website.run()
