@@ -4,16 +4,15 @@ import utils
 
 score_website: Flask = Flask(__name__)
 
-
 @score_website.route('/')
 def main_page() -> str:
-    with open(utils.scores_file_name) as scores_file:
-        score: str = scores_file.read()
-
         # try to parse score. if passes, display score on web page, of not, display erroron web page.
         try:
-            int(score)
-            return f'''
+            with open(utils.scores_file_name) as scores_file:
+                score: str = scores_file.read()
+                int(score)
+
+                return f'''
 <html>
     <head>
         <title> Scores Game</title>
@@ -23,8 +22,8 @@ def main_page() -> str:
         <div id="score">{score}</dev>
     </body>
 </html>'''
-        except ValueError:
-            return f'''
+        except (ValueError, FileNotFoundError):
+                return f'''
 <html>
     <head>
         <title>Scores Game</title>
