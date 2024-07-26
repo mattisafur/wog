@@ -35,4 +35,4 @@ def main_page() -> str:
     </body>
 </html>'''
 
-score_website.run()
+score_website.run('0.0.0.0')
