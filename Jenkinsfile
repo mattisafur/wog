@@ -4,6 +4,13 @@ pipeline {
     // The agent requires docker to be installed on it. as this code is run on a single node and WILL NOT be run in any o0ther location, the is real need to specify agents.1
     agent any
 
+    environment {
+        DOCKER_CREDENTIALS_ID = 'dockerhub-mattisafur'
+        IMAGE_NAME = 'mattisafur/wog'
+        IMAGE_TAG = 'latest'
+        DOCKER_REGISTRY = 'docker.io'
+    }
+
     stages {
         stage('Build') {
             steps{
@@ -23,7 +30,6 @@ pipeline {
             steps {
                 // create and activate venv, install requirements
                 // run end to end test
-                // deactivate and remove venv
                 sh '''
                 python3 -m venv .venv
                 . ./.venv/bin/activate
@@ -32,7 +38,6 @@ pipeline {
                 python3 e2e.py
                 
                 deactivate
-                rm -r .venv
                 '''
             }
         }
@@ -41,8 +46,20 @@ pipeline {
                 // stop web server
                 sh 'docker compose down'
 
-                // TODO push to dockerhub
+                // push image to dockerhub
+                withDockerRegistry([credentialsId: $DOCKER_CREDENTIALS_ID, url: 'https://${DOCKER_REGISTRY}/']) {
+                    sh 'docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .'
+                }
             }
+        }
+    }
+    post {
+        always {
+            // delete venv
+            sh 'rm -r .venv'
+
+            // prune docker
+            sh 'docker system prune -af'
         }
     }
 }
