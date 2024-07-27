@@ -47,7 +47,7 @@ pipeline {
 
                 // push image to dockerhub
                 withDockerRegistry([credentialsId: 'dockerhub-mattisafur', url: '']) {
-                    sh 'docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .'
+                    sh 'docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}'
                 }
             }
         }
