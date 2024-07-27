@@ -22,7 +22,7 @@ pipeline {
         stage('Test') {
             steps {
                 // run end to end test
-                sh 'python e2e.py'
+                sh 'python3 e2e.py'
             }
         }
         stage('Finalize') {
