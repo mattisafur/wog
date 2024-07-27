@@ -22,19 +22,15 @@ pipeline {
         stage('Test') {
             steps {
                 // create and activate venv, install requirements
+                // run end to end test
+                // deactivate and remove venv
                 sh '''
                 python3 -m venv .venv
                 . ./.venv/bin/activate
                 pip install -r requirements.txt
 
                 python3 e2e.py
-                '''
-
-                // run end to end test
-                // sh 'python3 e2e.py'
-
-                // deactivate and remove venv
-                sh '''
+                
                 deactivate
                 rm -r .venv
                 '''
