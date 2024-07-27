@@ -5,7 +5,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'dockerhub-mattisafur'
         IMAGE_NAME = 'mattisafur/wog'
         IMAGE_TAG = 'latest'
         DOCKER_REGISTRY = 'docker.io'
@@ -47,7 +46,7 @@ pipeline {
                 sh 'docker compose down'
 
                 // push image to dockerhub
-                withDockerRegistry([credentialsId: $DOCKER_CREDENTIALS_ID, url: 'https://${DOCKER_REGISTRY}/']) {
+                withDockerRegistry([credentialsId: 'dockerhub-mattisafur', url: '']) {
                     sh 'docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} .'
                 }
             }
