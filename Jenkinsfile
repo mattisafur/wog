@@ -24,7 +24,7 @@ pipeline {
                 // create and activate venv, install requirements
                 sh '''
                 python3 -m venv .venv
-                . ./.venv/Scripts/activate
+                . ./.venv/bin/activate
                 pip install -r requirements.txt
                 '''
 
