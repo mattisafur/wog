@@ -11,7 +11,7 @@ pipeline {
         stage('Build') {
             // build docker container
             script {
-                docker.build('wog:latest')
+                docker.build('mattisafur/wog:latest')
             }
         }
         stage('Run') {

@@ -1,5 +1,5 @@
 services:
   web:
-    image: python:alpine
+    image: mattisafur/wog:latest
     ports:
       - 8777:5000
