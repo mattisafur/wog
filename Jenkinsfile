@@ -26,10 +26,12 @@ pipeline {
                 python3 -m venv .venv
                 . ./.venv/bin/activate
                 pip install -r requirements.txt
+
+                python3 e2e.py
                 '''
 
                 // run end to end test
-                sh 'python3 e2e.py'
+                // sh 'python3 e2e.py'
 
                 // deactivate and remove venv
                 sh '''
