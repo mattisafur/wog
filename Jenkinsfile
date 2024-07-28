@@ -13,6 +13,12 @@ pipeline {
     stages {
         stage('Build') {
             steps{
+                // check is docker is installled
+                def dockerVersion = sh 'docker --version'
+                if(!dockerVersion) {
+                    error('Docker is not installed on the node')
+                }
+
                 // build docker container
                 script {
                     docker.build('mattisafur/wog:latest')
@@ -27,6 +33,12 @@ pipeline {
         }
         stage('Test') {
             steps {
+                // check if python3 is installed on the system
+                def pythonVersion = sh 'python3 --version'
+                if(!pythonVersion) {
+                    error('Python 3 is not installed on the node')
+                }
+
                 // create and activate venv, install requirements
                 // run end to end test
                 sh '''
