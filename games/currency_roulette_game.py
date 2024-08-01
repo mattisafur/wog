@@ -41,7 +41,7 @@ def play(difficulty: str) -> bool:
 
 def get_money_interval(number: int, error_margin: int) -> tuple[float, float]:
     exchange_rates = currencyapicom.Client(
-        credentials.Currency_api_key).latest()
+        credentials.CURRENCY_API_KEY).latest()
     ils_exchange_rate: float = exchange_rates.get(
         'data', {}).get('ILS', {}).get('value')
     converted_number: float = number * ils_exchange_rate

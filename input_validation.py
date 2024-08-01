@@ -3,7 +3,7 @@ def print_if_exist(prompt: str | None) -> None:
         print(prompt)
 
 
-def validate_int_in_range(string: str, min: int, max: int, input_empty_prompt: str | None = None, input_not_number_prompt: str | None = None, input_not_int_prompt: str | None = None, input_not_in_range_prompt: str | None = None) -> int | None:
+def validate_int_in_range(string: str, lower_limit: int, upper_limit: int, input_empty_prompt: str | None = None, input_not_number_prompt: str | None = None, input_not_int_prompt: str | None = None, input_not_in_range_prompt: str | None = None) -> int | None:
     # no input (empty)
     if not string:
         print_if_exist(input_empty_prompt)
@@ -24,7 +24,7 @@ def validate_int_in_range(string: str, min: int, max: int, input_empty_prompt: s
         return None
 
     # input not in range
-    if not min <= result <= max:
+    if not lower_limit <= result <= upper_limit:
         print_if_exist(input_not_in_range_prompt)
         return None
 
