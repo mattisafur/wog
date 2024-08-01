@@ -1,7 +1,7 @@
 properties([pipelineTriggers([pollSCM('H * * * *')])])
 
 pipeline {
-    // The agent requires docker to be installed on it. as this code is run on a single node and WILL NOT be run in any o0ther location, the is real need to specify agents.1
+    // The agent requires docker to be installed on it. as this code is run on a single node and WILL NOT be run in any other location, the is real need to specify agents.1
     agent any
 
     environment {
