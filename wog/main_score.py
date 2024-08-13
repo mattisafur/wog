@@ -1,6 +1,6 @@
 from flask import Flask
 
-from ..shared import score_config
+import score_config
 
 score_website: Flask = Flask(__name__)
 

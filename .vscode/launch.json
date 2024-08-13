@@ -5,6 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python Debugger: WOG",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/wog/main.py",
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "Python Debugger: Score Site",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/wog/main_score.py",
+            "console": "integratedTerminal",
+        },
+        {
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",

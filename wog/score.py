@@ -1,11 +1,11 @@
-import utils
+import score_config
 import input_validation
 
 
 def add_score(difficutly_number: int) -> None:
     points: int = (difficutly_number * 3) + 5
 
-    with open(utils.scores_file_name, 'r+', encoding='ascii') as scores_file:
+    with open(score_config.SCORE_FILE_NAME, 'r+', encoding='ascii') as scores_file:
         score_file_value: str = scores_file.read()
 
         if score_file_value:
