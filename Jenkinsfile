@@ -13,8 +13,8 @@ pipeline {
     stages {
         stage('Build') {
             steps{
+                // check is docker is installled
                 script {
-                    // check is docker is installled
                     def dockerVersion = sh 'docker --version'
                     if(!dockerVersion) {
                         error('Docker is not installed on the node')
@@ -36,9 +36,11 @@ pipeline {
         stage('Test') {
             steps {
                 // check if python3 is installed on the system
-                def pythonVersion = sh 'python3 --version'
-                if(!pythonVersion) {
-                    error('Python 3 is not installed on the node')
+                script {
+                    def pythonVersion = sh 'python3 --version'
+                    if(!pythonVersion) {
+                        error('Python 3 is not installed on the node')
+                    }
                 }
 
                 // create and activate venv, install requirements
