@@ -37,8 +37,8 @@ pipeline {
             steps {
                 // check if python3 is installed on the system
                 script {
-                    def pythonVersion = sh(script: 'python3 --version', returnStatus: true)
-                    if(!pythonVersion) {
+                    def pythonState = sh(script: 'python3 --version', returnStatus: true)
+                    if(pythonState != 0) {
                         error('Python 3 is not installed on the node')
                     }
                 }
