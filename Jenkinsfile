@@ -14,9 +14,11 @@ pipeline {
         stage('Build') {
             steps{
                 // check is docker is installled
-                def dockerStatus = sh(script: 'docker --version', returnStatus: true)
-                if(dockerStatus != 0) {
-                    error('Docker is not installed on the node')
+                script {
+                    def dockerStatus = sh(script: 'docker --version', returnStatus: true)
+                    if(dockerStatus != 0) {
+                        error('Docker is not installed on the node')
+                    }
                 }
 
                 // build docker container
