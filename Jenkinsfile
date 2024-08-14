@@ -13,10 +13,12 @@ pipeline {
     stages {
         stage('Build') {
             steps{
-                // check is docker is installled
-                def dockerVersion = sh 'docker --version'
-                if(!dockerVersion) {
-                    error('Docker is not installed on the node')
+                script {
+                    // check is docker is installled
+                    def dockerVersion = sh 'docker --version'
+                    if(!dockerVersion) {
+                        error('Docker is not installed on the node')
+                    }
                 }
 
                 // build docker container
