@@ -30,7 +30,7 @@ pipeline {
         stage('Run') {
             steps {
                 // start web server
-                sh 'docker compose up -d'
+                sh 'docker-compose up -d'
             }
         }
         stage('Test') {
@@ -59,7 +59,7 @@ pipeline {
         stage('Finalize') {
             steps {
                 // stop web server
-                sh 'docker compose down'
+                sh 'docker-compose down'
 
                 // push image to dockerhub
                 withDockerRegistry([credentialsId: 'dockerhub-mattisafur', url: '']) {
