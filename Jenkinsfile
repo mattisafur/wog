@@ -1,8 +1,10 @@
-properties([pipelineTriggers([pollSCM('H * * * *')])])
-
 pipeline {
     // The agent requires docker to be installed on it. as this code is run on a single node and WILL NOT be run in any other location, the is real need to specify agents.1
     agent any
+
+    triggers {
+        pollSCM('H * * * *')
+    }
 
     environment {
         IMAGE_NAME = 'mattisafur/wog'
