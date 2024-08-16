@@ -40,7 +40,7 @@ def add_score(difficutly_number: int) -> None:
             previous_score: int = 0
 
         score: int = previous_score + points
-        
+
         scores_file.seek(0)
         scores_file.write(str(score))
         scores_file.truncate()
