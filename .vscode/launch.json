@@ -8,14 +8,14 @@
             "name": "Python Debugger: WOG",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/wog/main.py",
+            "program": "${workspaceFolder}/src/wog/main.py",
             "console": "integratedTerminal",
         },
         {
             "name": "Python Debugger: Score Site",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/wog/main_score.py",
+            "program": "${workspaceFolder}/src/score_site/main_score.py",
             "console": "integratedTerminal",
         },
         {

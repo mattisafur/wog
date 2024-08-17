@@ -31,7 +31,7 @@ def validate_int_in_range(string: str, lower_limit: int, upper_limit: int, input
     return result
 
 
-def validate_int(string: str, input_empty_prompt: str | None = None, input_not_number_prompt: str | None = None, input_not_int_prompt: str | None = None):
+def validate_int(string: str, input_empty_prompt: str | None = None, input_not_number_prompt: str | None = None, input_not_int_prompt: str | None = None) -> int | None:
     # no input (empty)
     if not string:
         print_if_exist(input_empty_prompt)
