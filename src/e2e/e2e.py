@@ -5,8 +5,6 @@ import selenium
 import selenium.webdriver
 from selenium.webdriver.common.by import By
 
-import input_validation
-
 
 def test_scores_service(url: str) -> bool:
     """Tests if score shows up in website and is between 1 and 1000"""
@@ -21,7 +19,7 @@ def test_scores_service(url: str) -> bool:
         # get and parse scoreERROR:
         score = driver.find_element(By.ID, "score").text
 
-        parsed_score = input_validation.validate_int(score)
+        parsed_score = int(score)
         if parsed_score is not None:
             if 1 <= parsed_score <= 1000:
                 return True

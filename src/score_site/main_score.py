@@ -1,15 +1,21 @@
+"Score website showing the score from a text file"
 from flask import Flask
 
-import score_config
+SCORE_FILE_NAME: str = "Score.txt"
+BAD_RETURN_CODE: int = 500
 
 score_website: Flask = Flask(__name__)
 
 
 @score_website.route("/")
 def main_page() -> str:
+    """
+    Reads score from a text file and displays it on a web page.
+    Shows an error page is fais to read file
+    """
     # try to parse score. if passes, display score on web page, of not, display erroron web page.
     try:
-        with open(score_config.SCORE_FILE_NAME, encoding="UTF-8") as scores_file:
+        with open(SCORE_FILE_NAME, encoding="UTF-8") as scores_file:
             score: str = scores_file.read()
             int(score)
 
@@ -31,7 +37,7 @@ def main_page() -> str:
     </head>
     <body>
         <h1>ERROR:</h1>
-        <div id="score" style="color:red">{score_config.BAD_RETURN_CODE}</div>
+        <div id="score" style="color:red">{BAD_RETURN_CODE}</div>
     </body>
 </html>"""
 
