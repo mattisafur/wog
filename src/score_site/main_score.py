@@ -22,8 +22,8 @@ def main_page() -> str:
             return f"""
 <html>
     <head>
-        <title> Scores Game</title>
-    </head>s
+        <title>Scores Game</title>
+    </head>
     <body>
         <h1>The score is:</h1>
         <div id="score">{score}</dev>
