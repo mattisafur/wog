@@ -16,12 +16,14 @@ pipeline {
         stage('Build') {
             steps{
                 // check if docker is installled
-                def dockerVersion = sh 'docker --version'
-                if(!dockerVersion) {
-                    error('Docker is not installed on the node')
+                script {
+                    def dockerVersion = sh 'docker --version'
+                    if(!dockerVersion) {
+                        error('Docker is not installed on the node')
+                    }
                 }
 
-                dir('apps') {
+                dir('src/score_site') {
                     // build docker container
                     script {
                         docker.build('mattisafur/wog:latest')
@@ -31,26 +33,32 @@ pipeline {
         }
         stage('Run') {
             steps {
-                // start web server
-                sh 'docker compose up -d'
+                dir('src/score_site')
+                {
+                    // start web server
+                    sh 'docker compose up -d'
+                }
             }
         }
         stage('Test') {
             steps {
                 // check if python3 is installed on the system
-                def pythonVersion = sh 'python3 --version'
-                if(!pythonVersion) {
-                    error('Python 3 is not installed on the node')
+                script {
+                    def pythonVersion = sh 'python3 --version'
+                    if(!pythonVersion) {
+                        error('Python 3 is not installed on the node')
+                    }
                 }
 
                 // create and activate venv, install requirements
                 // run end to end test
+
                 sh '''
                 python3 -m venv .venv
                 . ./.venv/bin/activate
                 pip install -r requirements.txt
 
-                python3 e2e.py
+                python3 ./src/e2e/e2e.py
                 
                 deactivate
                 '''
@@ -58,8 +66,11 @@ pipeline {
         }
         stage('Finalize') {
             steps {
+                dir('src/score_site')
+                {
                 // stop web server
                 sh 'docker compose down'
+                }
 
                 // push image to dockerhub
                 withDockerRegistry([credentialsId: 'dockerhub-mattisafur', url: '']) {
