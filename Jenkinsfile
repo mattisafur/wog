@@ -53,14 +53,18 @@ pipeline {
                 // create and activate venv, install requirements
                 // run end to end test
 
-                sh '''
-                python3 -m venv .venv
-                . ./.venv/bin/activate
+                dir('src/e2e')
+                {
+                    sh '''
+                    python3 -m venv .venv
+                    . ./.venv/bin/activate
 
-                python3 ./src/e2e/e2e.py
-                
-                deactivate
-                '''
+                    pip install -r e2e_requirements.txt
+                    python3 e2e.py
+                    
+                    deactivate
+                    '''
+                }
             }
         }
         stage('Finalize') {
