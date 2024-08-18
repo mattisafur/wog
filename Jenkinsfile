@@ -17,8 +17,8 @@ pipeline {
             steps{
                 // check if docker is installled
                 script {
-                    def dockerVersion = sh 'docker --version'
-                    if(!dockerVersion) {
+                    def dockerStatus = sh(script: 'docker --version', returnStatus: true)
+                    if(dockerStatus != 0) {
                         error('Docker is not installed on the node')
                     }
                 }
@@ -44,8 +44,8 @@ pipeline {
             steps {
                 // check if python3 is installed on the system
                 script {
-                    def pythonVersion = sh 'python3 --version'
-                    if(!pythonVersion) {
+                    def pythonState = sh(script: 'python3 --version', returnStatus: true)
+                    if(pythonState != 0) {
                         error('Python 3 is not installed on the node')
                     }
                 }
