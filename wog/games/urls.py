@@ -1,5 +1,5 @@
 """
-URL configuration for Guess Game app
+URL configuration for Games app
 """
 
 from django.urls import URLPattern, path
