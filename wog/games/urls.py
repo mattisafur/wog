@@ -1,10 +1,9 @@
 """
-URL configuration for Games app
+URL configuration for games app
 """
 
 from django.urls import URLPattern, path
 from . import views
 
 urlpatterns: list[URLPattern] = [
-    path("", views.test_render)
 ]
