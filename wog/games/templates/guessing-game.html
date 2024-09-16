@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guessing Game</title>
+    </head>
+    <body>
+        {% if difficulty_selected %}
+            {% if guess_submitted %}
+                {% if user_won %}
+                <p>You won!</p>
+                {% else %}
+                <p>you lost.</p>
+                <p>the number was {{ generated_number }}</p>
+                {% endif %}
+                <form id="after-game-form" method="post">
+                    {% csrf_token %}
+                    <p>Would you like to play again?</p>
+                    <button type="submit" name="play-again">Play again</button>
+                    <button type="submit" name="select-difficulty">Select difficulty</button>
+                    <button type="submit" name="go-home">Go home</button>
+                </form>
+            {% else %}
+            <form id="user-guess-form" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="form-prefix" value="{{ form.prefix }}">
+                {{ form }}
+                <input type="submit" value="Submit">
+            </form>
+            {% endif %}
+        {% else %}
+        <form id="difficulty-selection-form" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+        {% endif %}
+    </body>
+</html>
